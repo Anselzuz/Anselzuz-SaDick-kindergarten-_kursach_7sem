@@ -26,6 +26,13 @@ namespace SaDick.UsersLogic.AdminLogic
                         return result;
                     }
 
+                    //Check num of children in the group (cant be more 30)
+                    if (ctx.Children.AsNoTracking().Where(children => children.GroupNum == groupNum).Count() > 29)
+                    {
+                        result = "Number of children cant be more 30.";
+                        return result;
+                    }
+
                     //Does such a group exist?
                     if (ctx.ChildGroups.AsNoTracking().Where(group => group.GroupNum == groupNum).Count() == 0)
                     {
